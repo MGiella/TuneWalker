@@ -1,17 +1,34 @@
 {
-    "routes": [
-      {
-        "route": "/playlist/*",
-        "authLevel": "user"
-      },
-      {
-        "route": "/profile/*",
-        "authLevel": "user"
-      },
-      {
-        "route": "/public/*",
-        "authLevel": "anonymous"
-      }
-    ]
-  }
-  
+  "version": "1.0",
+  "routes": [
+    {
+      "route": "/",
+      "authProvider": "anonymous",
+      "unauthenticatedAction": "RedirectToLoginPage"
+    },
+    {
+      "route": "/playlist",
+      "authProvider": "google",
+      "allowedRoles": ["authenticated"],
+      "unauthenticatedAction": "RedirectToLoginPage"
+    },
+    {
+      "route": "/profile",
+      "authProvider": "google",
+      "allowedRoles": ["authenticated"],
+      "unauthenticatedAction": "RedirectToLoginPage"
+    },
+    {
+      "route": "/.auth/login/google",
+      "authProvider": "google",
+      "allowedRoles": [],
+      "unauthenticatedAction": "RedirectToLoginPage"
+    },
+    {
+      "route": "/.auth/logout",
+      "authProvider": "google",
+      "allowedRoles": [],
+      "unauthenticatedAction": "RedirectToLoginPage"
+    }
+  ]
+}
