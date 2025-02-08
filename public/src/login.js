@@ -3,14 +3,20 @@ async function checkAuthentication() {
     try {
         // Chiedi le informazioni dell'utente tramite il punto finale .auth/me
         const response = await fetch('https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/me');
-        const user = await response.json();
-
-        if (user && user.length > 0) {
-            // Utente autenticato, carica il contenuto protetto
+        if (response.ok) {
+            // Se lo stato della risposta è 200 (OK)
+            const user = await response.json();
             console.log('Utente autenticato:', user);
         } else {
-            // Utente non autenticato, reindirizza alla pagina di login
-            window.location.href = '/.auth/login/google';
+            // Se la risposta ha uno stato diverso da 200 (ad esempio 401 o 403)
+            console.error('Errore di autenticazione, status:', response.status);
+            if (response.status === 401) {
+                // L'utente non è autenticato, reindirizza alla pagina di login
+                window.location.href = '/.auth/login/google/callback';
+            } else {
+                // Gestisci altri errori
+                console.error('Errore:', response.statusText);
+            }
         }
     } catch (error) {
         const response = await fetch('https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google/callback');
