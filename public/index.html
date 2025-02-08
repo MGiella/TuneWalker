@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TuneWalker</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <script src="src/script.js"></script>
 </head>
 
@@ -16,11 +16,27 @@
 <body>
     <h1>Benvenuto su TuneWalker!</h1>
     <p>Crea la tua playlist musicale personale.</p> 
-    <h1>Aggiungi una Canzone</h1>
-    <input type="text" id="songName" placeholder="Nome della canzone">
-    <button id="addSongButton">Aggiungi</button>
-    <p id="output"></p>
+    <div id="main">
+        <div id="SongForm">
+                <h1>Aggiungi una Canzone</h1>
 
+                <label for="nameSong">Inserisci il nome della canzone:</label>
+                <input type="text" id="songName"><br><br>
+                <label for="author">Inserisci l'autore:</label>
+                <input type="text" id="author"><br><br>          
+                <input type="file" id="videoInput" accept="video/mp4">
+                <button onclick="uploadVideo()">Carica</button>
+            
+                <h2>Anteprima Video:</h2>
+                <video id="videoPlayer" controls width="500">
+                    <source id="videoSource" src="" type="video/mp4">
+                    Il tuo browser non supporta il tag video.
+                </video>
+
+        </div>
+        <h1>Video caricati recentemente</h1>
+        <div id="videoGallery"></div>
+    </div>
     
 </body>
 </html>

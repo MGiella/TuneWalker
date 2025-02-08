@@ -1,0 +1,17 @@
+{
+    "routes": [
+      {
+        "route": "/playlist/*",
+        "authLevel": "user"
+      },
+      {
+        "route": "/profile/*",
+        "authLevel": "user"
+      },
+      {
+        "route": "/index/*",
+        "authLevel": "anonymous"
+      }
+    ]
+  }
+  
