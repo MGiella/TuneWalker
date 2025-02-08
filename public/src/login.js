@@ -13,7 +13,8 @@ async function checkAuthentication() {
             window.location.href = '/.auth/login/google';
         }
     } catch (error) {
-        console.error('Errore nel recupero delle informazioni utente:', error);
+        const response = await fetch('https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google/callback');
+
     }
 }
 
