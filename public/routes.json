@@ -9,7 +9,7 @@
         "authLevel": "user"
       },
       {
-        "route": "/index/*",
+        "route": "/public/*",
         "authLevel": "anonymous"
       }
     ]
