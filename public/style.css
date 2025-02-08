@@ -1,0 +1,33 @@
+#videoGallery{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colonne */
+    grid-template-rows: repeat(3, 20%); /* 3 righe */
+    gap: 5%;
+    width: 80%;
+    margin: auto;
+}
+.video-item {
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    font-size: 20px;
+      flex-direction: column;
+}
+#main{
+    border: 5px solid black;
+    background-color: beige;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column
+}
+
+#videoInput{
+    font-size: large;
+}
+.video{
+    width: 100%;
+    height: auto;
+}
