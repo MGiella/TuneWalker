@@ -18,7 +18,7 @@ function displayVideos(videos) {
                 <source src="${video.videoUrl}" type="video/mp4">
                 Il tuo browser non supporta il formato video.
             </video>
-            <h3>${video.name}</h3>
+            <h3>${video.display}</h3>
         `;
 
         gallery.appendChild(videoItem);
@@ -48,17 +48,22 @@ async function uploadVideo() {
     const songName = document.getElementById("songName").value
     const author = document.getElementById("author").value
     const fileInput = document.getElementById("videoInput");
-    if (fileInput.files.length === 0) {
-        alert("Seleziona un file prima di caricare!");
-                        return;
-    }
-    console.log(songName + "by" + author )
-        
-        const file = fileInput.files[0];
-        const formData = new FormData();
+
+    if (!file || !songName || !author) {
+        alert('Compila tutti i campi!');
+        return;
+      }
+
+    const authResponse = await fetch('/.auth/me', { credentials: 'include' });
+    const authData = await authResponse.json();
+    const userId = authData[0].user_id;
+    const file = fileInput.files[0];
+
+    const formData = new FormData();
         formData.append("song", file);
         formData.append("songName", songName);
         formData.append("author", author);
+        formData.append("userId", userId);
 
         
         try {
