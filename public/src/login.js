@@ -31,16 +31,9 @@ async function checkAuthentication() {
 
 
 async function login() {
-    const response = await fetch('https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google/callback');
-    if (response.ok) {
-        // Se lo stato della risposta è 200 (OK)
-        const user = await response.json();
-        console.log('Utente autenticato:', user);
-    } else {
-        // Se la risposta ha uno stato diverso da 200 (ad esempio 401 o 403)
-        console.error('Errore di autenticazione, status:', response.status);
-    }
-    
+    const returnUrl = encodeURIComponent(window.location.pathname); // Salva la pagina attuale
+    window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
+   
 }
 // Chiamare la funzione per verificare l'autenticazione quando la pagina si carica
 window.onload = checkAuthentication;
