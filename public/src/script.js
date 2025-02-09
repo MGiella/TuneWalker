@@ -48,6 +48,7 @@ async function uploadVideo() {
     const songName = document.getElementById("songName").value
     const author = document.getElementById("author").value
     const fileInput = document.getElementById("videoInput");
+    const file = fileInput.files[0];
 
     if (!file || !songName || !author) {
         alert('Compila tutti i campi!');
@@ -57,7 +58,7 @@ async function uploadVideo() {
     const authResponse = await fetch('/.auth/me', { credentials: 'include' });
     const authData = await authResponse.json();
     const userId = authData[0].user_id;
-    const file = fileInput.files[0];
+
 
     const formData = new FormData();
         formData.append("song", file);
@@ -74,6 +75,12 @@ async function uploadVideo() {
         
             const result = await response.json();
             if (response.ok) {
+                noSongs = document.getElementById("nosongs")
+                if (result.length === 0) {
+                    noSongs.style.display="block"}
+                else{
+                    noSongs.style.display="none"}
+  
                 const videoUrl = result.url;
                 document.getElementById("videoSource").src = videoUrl;
                 document.getElementById("videoPlayer").load();
