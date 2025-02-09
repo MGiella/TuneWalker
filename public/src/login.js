@@ -6,10 +6,14 @@ async function checkAuthentication() {
         if (response.ok) {
             // Se lo stato della risposta è 200 (OK)
             const user = await response.json();
-            private=document.getElementsByClassName("private-content")
-                anonymous=document.getElementsByClassName("anonymous-content")
-                private.style.display = 'block';
-                anonymous.style.display = 'none';
+            
+            document.querySelectorAll('.anonymous-content').forEach(element => {
+                element.style.display = 'none';
+            });
+
+            document.querySelectorAll('.private-content').forEach(element => {
+                element.style.display = 'block'; 
+            });
         } else {
             // Se la risposta ha uno stato diverso da 200 (ad esempio 401 o 403)
             console.error('Errore di autenticazione, status:', response.status);
@@ -33,9 +37,7 @@ async function checkAuthentication() {
 async function login() {
     const returnUrl = encodeURIComponent(window.location.pathname); // Salva la pagina attuale
     window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
-   
+    checkAuthentication()
 }
 // Chiamare la funzione per verificare l'autenticazione quando la pagina si carica
 window.onload = checkAuthentication;
-
-
