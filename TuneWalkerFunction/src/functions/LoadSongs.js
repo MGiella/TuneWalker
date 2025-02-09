@@ -15,7 +15,7 @@ const databaseId = "TuneWalkerDB";
 const containerId = "Songs";    
 
 app.http('LoadSongs', {
-    methods: ["GET"],
+    methods: ["POST"],
     authLevel: "anonymous",
     handler: async (request, context) => {
         try {

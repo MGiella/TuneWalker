@@ -8,6 +8,7 @@ const containerId = "Songs";
 const containerName = "songs"; 
 
 app.http('AddSong', {
+    
     methods: ["POST"],
     authLevel: "anonymous",
     handler: async (request, context) => {
