@@ -45,8 +45,8 @@ async function LoadSongs() {
 }
     
 async function uploadVideo() {
-    const songName = document.getElementById("songName").value
-    const author = document.getElementById("author").value
+    const title = document.getElementById("title").value
+    const artist = document.getElementById("artist").value
     const fileInput = document.getElementById("videoInput");
     const file = fileInput.files[0];
 
@@ -62,8 +62,8 @@ async function uploadVideo() {
 
     const formData = new FormData();
         formData.append("song", file);
-        formData.append("songName", songName);
-        formData.append("author", author);
+        formData.append("title", title);
+        formData.append("artist", artist);
         formData.append("userId", userId);
 
         

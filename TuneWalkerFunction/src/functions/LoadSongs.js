@@ -23,12 +23,15 @@ app.http('LoadSongs', {
             const querySpec = {
                 query: "SELECT TOP 12 * FROM c ORDER BY c.lastModified DESC"
             };
-
+            
             const { resources: songs } = await cosmosClient
                 .database(databaseId)
                 .container(containerId)
                 .items.query(querySpec)
                 .fetchAll();
+
+            console.log("Fetch effettuata")
+
 
             // Crea un BlobServiceClient per accedere al Blob Storage
             const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
@@ -37,18 +40,21 @@ app.http('LoadSongs', {
             // Per ciascuna canzone, genera l'URL SAS e crea la proprietà 'display'
             const songsWithUrls = await Promise.all(songs.map(async (song) => {
                 // Recupera il blob corrispondente usando il blobName salvato in Cosmos
-                const blobName = song.blobName; // Assicurati che questo campo esista
+                const blobName = song.blobName; 
                 const blobClient = containerClient.getBlobClient(blobName);
                 const sasUrl = await generateSasUrl(blobClient, blobName);
 
                 return {
-                    songName: song.songName,
-                    author: song.author,
+                    title: song.title,
+                    artist: song.artist,
                     lastModified: song.lastModified,
                     videoUrl: sasUrl,
                     display: `${song.songName} by ${song.author}` // Formattazione per il frontend
                 };
             }));
+            console.log("SAS genearato")
+
+            
 
             return {
                 status: 200,
@@ -57,7 +63,7 @@ app.http('LoadSongs', {
             };
 
         } catch (error) {
-            context.log.error("Errore in LoadSongs:", error);
+            console.log("Errore in LoadSongs:", error);
             return {
                 status: 500,
                 body: JSON.stringify({ error: error.message }),

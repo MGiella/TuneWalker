@@ -8,15 +8,15 @@ const containerId = "Songs";
 const containerName = "songs"; 
 
 app.http('AddSong', {
-    
+
     methods: ["POST"],
     authLevel: "anonymous",
     handler: async (request, context) => {
         try {
             const formData = await request.formData();
             const file = formData.get("song"); // Prendi il file dal form
-            const songName = formData.get("songName")
-            const author = formData.get("author")
+            const songName = formData.get("title")
+            const author = formData.get("artist")
             const userId = formData.get("userId");
             if (!file) {
                 return { status: 400, body: "Nessun file ricevuto!" };
@@ -25,25 +25,28 @@ app.http('AddSong', {
 
             const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
             const containerClient = blobServiceClient.getContainerClient(containerName);
-            const blobName = `${userId}/${Date.now()}-${songName}.mp4`;
+            const blobName = `${userId}-${songName}-by-${author}.mp4`;
             const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+            console.log("Blob caricato")
 
             const cosmosClient = new CosmosClient(cosmosDbConnectionString);
             const database = cosmosClient.database(databaseName);
             const container = database.container(containerId);
+            console.log("Cosmos caricato")
 
             // Carica il file nel Blob Storage con i metadati
             await blockBlobClient.uploadData(await file.arrayBuffer(), {
                 blobHTTPHeaders: { blobContentType: "video/mp4"  },
                 metadata: { songName, author, userId }
             });
+            console.log("Caricamento su Blob")
 
 
             const newSong = {
                 id: blobName, // ID univoco
                 userId: userId, 
-                title: songName,
-                artist: author,
+                title: title,
+                artist: artist,
                 url: blockBlobClient.url,
                 createdAt: new Date().toISOString()
             };
@@ -61,7 +64,7 @@ app.http('AddSong', {
             };
 
         } catch (error) {
-            context.log.error("Errore:", error);
+            console.log("Errore:", error);
             return { status: 500, body: "Errore durante il caricamento." };
         }
     }
