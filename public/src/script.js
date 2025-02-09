@@ -50,7 +50,7 @@ async function uploadVideo() {
     const fileInput = document.getElementById("videoInput");
     const file = fileInput.files[0];
 
-    if (!file || !songName || !artist) {
+    if (!file || !title || !artist) {
         alert('Compila tutti i campi!');
         return;
       }
