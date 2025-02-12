@@ -50,7 +50,7 @@ async function LoadSongs() {
         }
         // Verifica se la risposta è ok
         if (songResponse.ok) {
-            const videos = await response.json();
+            const videos = await songResponse.json();
             displayVideos(videos);  // Chiamata alla funzione che visualizzerà i video
         } else {
             console.error('Errore nel caricamento dei video:', response.status);
@@ -62,7 +62,7 @@ async function LoadSongs() {
                 method: 'POST'
             });
             if (songResponse.ok) {
-                const videos = await response.json();
+                const videos = await songResponse.json();
                 displayVideos(videos);  // Chiamata alla funzione che visualizzerà i video
             } else {
                 console.error('Errore nel caricamento dei video:', response.status);
