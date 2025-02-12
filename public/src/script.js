@@ -38,21 +38,22 @@ async function LoadSongs() {
     try {
         const authResponse = await fetch('/.auth/me', { credentials: 'include' });
         let response; 
+        
         if (!authResponse.ok) {
             // Se l'utente non è autenticato, invia una richiesta per le canzoni senza userId
-            response = await fetch('https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs', {
+            songResponse = await fetch('https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs', {
                 method: 'POST'
             });
         } else {
             // Se l'utente è autenticato, invia una richiesta con userId
             const authData = await authResponse.json();
             const userId = authData[0].user_id;
-            response = await fetch(`https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs?userId=${userId}`, {
+            songResponse = await fetch(`https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs?userId=${userId}`, {
                 method: 'POST'
             });
         }
         // Verifica se la risposta è ok
-        if (response.ok) {
+        if (songResponse.ok) {
             const videos = await response.json();
             displayVideos(videos);  // Chiamata alla funzione che visualizzerà i video
         } else {
