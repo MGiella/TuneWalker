@@ -2,11 +2,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Ottieni i dati dalla funzione Azure
     LoadSongs()
     });
+    
 
 // Funzione per visualizzare i video
 function displayVideos(videos) {
     const gallery = document.getElementById('videoGallery');
     gallery.innerHTML = '';  // Pulisce la galleria prima di aggiungere nuovi video
+
+    if (videos.length>0){
+        noSongs=document.getElementById('noSongs');
+        noSongs.style.display =="none"
+    }
+
 
     videos.forEach(video => {
         // Crea un nuovo elemento video
@@ -15,10 +22,10 @@ function displayVideos(videos) {
 
         videoItem.innerHTML = `
             <video controls class="video">
-                <source src="${video.videoUrl}" type="video/mp4">
+                <source src="${video.url}" type="video/mp4">
                 Il tuo browser non supporta il formato video.
             </video>
-            <h3>${video.display}</h3>
+            <h3>${video.title} by ${video.artist}</h3>
         `;
 
         gallery.appendChild(videoItem);
@@ -29,19 +36,34 @@ function displayVideos(videos) {
 
 async function LoadSongs() {
     try {
-        const response = await fetch('https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs', {
-            method: 'POST'
-        });
-            if (response.ok) {
-                const videos = await response.json();
-                displayVideos(videos);
-            } else {
-                console.error('Errore nel caricamento dei video');
-            }
-    } catch (error) {
-        console.error("Errore:", error);
-            alert("Errore durante la richiesta.");
+        const authResponse = await fetch('/.auth/me', { credentials: 'include' });
+        let response; 
+        if (!authResponse.ok) {
+            // Se l'utente non è autenticato, invia una richiesta per le canzoni senza userId
+            response = await fetch('https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs', {
+                method: 'POST'
+            });
+        } else {
+            // Se l'utente è autenticato, invia una richiesta con userId
+            const authData = await authResponse.json();
+            const userId = authData[0].user_id;
+            response = await fetch(`https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs?userId=${userId}`, {
+                method: 'POST'
+            });
         }
+        // Verifica se la risposta è ok
+        if (response.ok) {
+            const videos = await response.json();
+            displayVideos(videos);  // Chiamata alla funzione che visualizzerà i video
+        } else {
+            console.error('Errore nel caricamento dei video:', response.status);
+            alert('Errore nel caricamento dei video');
+        }
+    } catch (error) {
+        console.error("Errore durante la richiesta:", error);
+        alert("Errore durante la richiesta.");
+    }
+    
 }
     
 async function uploadVideo() {
