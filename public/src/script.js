@@ -12,7 +12,7 @@ function displayVideos(videos) {
         noSongs=document.getElementById('noSongs');
         noSongs.style.display =="none"
     }
-
+    console.log(videos)
     videos.forEach(video => {
         // Crea un nuovo elemento video
         const videoItem = document.createElement('div');
@@ -35,23 +35,16 @@ function displayVideos(videos) {
 async function LoadSongs() {
     try {
         const authResponse = await fetch('/.auth/me', { credentials: 'include' });
-        if (!authResponse.ok) {
-            // Se l'utente non è autenticato, invia una richiesta per le canzoni senza userId
-            songResponse = await fetch('https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs', {
-                method: 'GET'
-            });
-        } else {
             // Se l'utente è autenticato, invia una richiesta con userId
             const authData = await authResponse.json();
             const userId = authData[0].user_id;
             songResponse = await fetch(`https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs?userId=${userId}`, {
                 method: 'GET'
             });
-        }
         // Verifica se la risposta è ok
         if (songResponse.ok) {
-            const videos = await songResponse.json();
-            displayVideos(videos);  // Chiamata alla funzione che visualizzerà i video
+            const data = await songResponse.json();
+            displayVideos(data.songs);  // Chiamata alla funzione che visualizzerà i video
         } else {
             console.error('Errore nel caricamento dei video:', response.status);
             alert('Errore nel caricamento dei video');
@@ -62,8 +55,8 @@ async function LoadSongs() {
                 method: 'POST'
             });
             if (songResponse.ok) {
-                const videos = await songResponse.json();
-                displayVideos(videos);  // Chiamata alla funzione che visualizzerà i video
+                const data = await songResponse.json();
+                displayVideos(data.songs);
             } else {
                 console.error('Errore nel caricamento dei video:', response.status);
                 alert('Errore nel caricamento dei video');
