@@ -8,11 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 function displayVideos(videos) {
     const gallery = document.getElementById('videoGallery');
     gallery.innerHTML = '';  // Pulisce la galleria prima di aggiungere nuovi video
-    if (videos.length>0){
-        noSongs=document.getElementById('noSongs');
-        noSongs.style.display =="none"
-    }
-    console.log(videos)
+    
     videos.forEach(video => {
         // Crea un nuovo elemento video
         const videoItem = document.createElement('div');
@@ -34,13 +30,16 @@ function displayVideos(videos) {
 
 async function LoadSongs() {
     try {
+        const formData = new FormData();
         const authResponse = await fetch('/.auth/me', { credentials: 'include' });
             // Se l'utente è autenticato, invia una richiesta con userId
-            const authData = await authResponse.json();
-            const userId = authData[0].user_id;
-            songResponse = await fetch(`https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs?userId=${userId}`, {
-                method: 'GET'
-            });
+        const authData = await authResponse.json();
+        const userId = authData[0].user_id;
+        formData.append("userId", userId);
+        songResponse = await fetch(`https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs`, {
+            method: "POST",
+            body: formData
+        });
         // Verifica se la risposta è ok
         if (songResponse.ok) {
             const data = await songResponse.json();
@@ -51,8 +50,10 @@ async function LoadSongs() {
         }
     } catch (error) {
         try{
+            const formData = new FormData();
             songResponse = await fetch('https://tunewalkerfunctions.azurewebsites.net/api/LoadSongs', {
-                method: 'POST'
+                method: 'POST',
+                  body: formData
             });
             if (songResponse.ok) {
                 const data = await songResponse.json();

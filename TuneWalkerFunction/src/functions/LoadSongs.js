@@ -1,91 +1,56 @@
 const { app } = require('@azure/functions');
-const { BlobServiceClient, StorageSharedKeyCredential, generateBlobSASQueryParameters, BlobSASPermissions } = require("@azure/storage-blob");
-const { CosmosClient } = require('@azure/cosmos');
-
-// Variabili per Blob Storage
-const connectionString = process.env.AzureWebJobsStorage;
-const containerName = "songs";
-const accountName = process.env.AZURE_STORAGE_ACCOUNT;
-const accountKey = process.env.AZURE_STORAGE_KEY;
-
-// Variabili per Cosmos DB
+const { CosmosClient } = require("@azure/cosmos");
 const cosmosDbConnectionString = process.env.COSMOS_DB_CONNECTION_STRING;
-const cosmosClient = new CosmosClient(cosmosDbConnectionString);
-const databaseId = "TuneWalkerDB";       
-const containerId = "Songs";    
+const databaseName = "TuneWalkerDB";
+const containerId = "Songs";
 
 app.http('LoadSongs', {
     methods: ["POST"],
     authLevel: "anonymous",
     handler: async (request, context) => {
         try {
-            // Recupera i 12 documenti più recenti da Cosmos DB
-            const querySpec = {
-                query: "SELECT TOP 12 * FROM c ORDER BY c.lastModified DESC"
-            };
-            
-            const { resources: songs } = await cosmosClient
-                .database(databaseId)
-                .container(containerId)
-                .items.query(querySpec)
-                .fetchAll();
+            const cosmosClient = new CosmosClient(cosmosDbConnectionString);
+            const database = cosmosClient.database(databaseName);
+            const container = database.container(containerId);
+            console.log("Connesso a Cosmos DB");
 
-            console.log("Fetch effettuata")
+            const formData = await request.formData();
+            const userId = formData.get("userId"); // Prendi il file dal form
+            let querySpec;
 
-
-            // Crea un BlobServiceClient per accedere al Blob Storage
-            const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
-            const containerClient = blobServiceClient.getContainerClient(containerName);
-
-            // Per ciascuna canzone, genera l'URL SAS e crea la proprietà 'display'
-            const songsWithUrls = await Promise.all(songs.map(async (song) => {
-                // Recupera il blob corrispondente usando il blobName salvato in Cosmos
-                const blobName = song.blobName; 
-                const blobClient = containerClient.getBlobClient(blobName);
-                const sasUrl = await generateSasUrl(blobClient, blobName);
-
-                return {
-                    title: song.title,
-                    artist: song.artist,
-                    lastModified: song.lastModified,
-                    videoUrl: sasUrl,
-                    display: `${song.songName} by ${song.author}` // Formattazione per il frontend
+            // Se l'ID utente non è fornito, prendi le canzoni generali
+            if (!userId) {
+                querySpec = {
+                    query: "SELECT TOP 12 * FROM c ORDER BY c.lastModified DESC"
                 };
-            }));
-            console.log("SAS genearato")
+            } else {
+                // Altrimenti, filtra per userId
+                querySpec = {
+                    query: "SELECT TOP 12 * FROM c WHERE c.userId = @userId ORDER BY c.lastModified DESC", 
+                    parameters: [
+                        {
+                            name: "@userId",
+                            value: userId
+                        }
+                    ]
+                };
+            }
 
-            
+            // Esegui la query per ottenere i brani
+            const { resources: songs } = await container.items.query(querySpec).fetchAll();
 
+            console.log("Can songs retrieved:", songs);
+
+            // Restituisce la lista delle canzoni in formato JSON
             return {
                 status: 200,
-                body: JSON.stringify(songsWithUrls),
-                headers: { "Content-Type": "application/json" }
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ songs })
             };
 
         } catch (error) {
-            console.log("Errore in LoadSongs:", error);
-            return {
-                status: 500,
-                body: JSON.stringify({ error: error.message }),
-                headers: { "Content-Type": "application/json" }
-            };
+            console.log("Errore:", error);
+            return { status: 500, body: "Errore durante il recupero delle canzoni." };
         }
     }
 });
-
-// Funzione per generare l'URL SAS valido per 60 minuti
-async function generateSasUrl(blobClient, blobName) {
-    const expiryDate = new Date();
-    expiryDate.setMinutes(expiryDate.getMinutes() + 60); // SAS valido per 60 minuti
-
-    const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
-
-    const sasToken = generateBlobSASQueryParameters({
-        containerName: containerName,
-        blobName: blobName,
-        permissions: BlobSASPermissions.parse("r"), // Permessi di sola lettura
-        expiresOn: expiryDate
-    }, sharedKeyCredential).toString();
-
-    return `${blobClient.url}?${sasToken}`;
-}

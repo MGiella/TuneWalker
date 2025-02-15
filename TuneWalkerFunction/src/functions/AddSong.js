@@ -15,8 +15,8 @@ app.http('AddSong', {
         try {
             const formData = await request.formData();
             const file = formData.get("song"); // Prendi il file dal form
-            const songName = formData.get("title")
-            const author = formData.get("artist")
+            const title = formData.get("title")
+            const artist = formData.get("artist")
             const userId = formData.get("userId");
             if (!file) {
                 return { status: 400, body: "Nessun file ricevuto!" };
@@ -25,7 +25,7 @@ app.http('AddSong', {
 
             const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
             const containerClient = blobServiceClient.getContainerClient(containerName);
-            const blobName = `${userId}-${songName}-by-${author}.mp4`;
+            const blobName = `${userId}-${title}-by-${artist}.mp4`;
             const blockBlobClient = containerClient.getBlockBlobClient(blobName);
             console.log("Blob caricato")
 
@@ -37,7 +37,7 @@ app.http('AddSong', {
             // Carica il file nel Blob Storage con i metadati
             await blockBlobClient.uploadData(await file.arrayBuffer(), {
                 blobHTTPHeaders: { blobContentType: "video/mp4"  },
-                metadata: { songName, author, userId }
+                metadata: { title, artist, userId }
             });
             console.log("Caricamento su Blob")
 
