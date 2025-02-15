@@ -3,14 +3,15 @@ async function checkAuthentication() {
     try {
         // Chiedi le informazioni dell'utente tramite il punto finale .auth/me
         const authResponse = await fetch('/.auth/me', { credentials: 'include' });        if (response.ok) {
-        const authData = await authResponse.json();
-        const userId = authData[0].user_id;
-        LoadAllSongs(userId)
+        if (response.ok) {  
+            const authData = await authResponse.json();
+            const userId = authData[0].user_id;
+            LoadAllSongs(userId)
         } else {
             const returnUrl = encodeURIComponent(window.location.pathname); // Salva la pagina attuale
             window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
         }
-    } catch (error) {
+    }} catch (error) {
         const returnUrl = encodeURIComponent(window.location.pathname); // Salva la pagina attuale
         window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
 
