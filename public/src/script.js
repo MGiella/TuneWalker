@@ -99,12 +99,6 @@ async function uploadVideo() {
         
             const result = await response.json();
             if (response.ok) {
-                noSongs = document.getElementById("nosongs")
-                if (result.length === 0) {
-                    noSongs.style.display="block"}
-                else{
-                    noSongs.style.display="none"}
-  
                 const videoUrl = result.url;
                 document.getElementById("videoSource").src = videoUrl;
                 document.getElementById("videoPlayer").load();
