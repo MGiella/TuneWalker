@@ -3,7 +3,7 @@ async function checkAuthentication() {
     try {
         // Chiedi le informazioni dell'utente tramite il punto finale .auth/me
         const authResponse = await fetch('/.auth/me', { credentials: 'include' });        if (response.ok) {
-        if (response.ok) {  
+        if (authResponse.ok) {  
             const authData = await authResponse.json();
             const userId = authData[0].user_id;
             LoadAllSongs(userId)
@@ -16,6 +16,29 @@ async function checkAuthentication() {
         window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
 
     }
+}
+
+
+// Funzione per visualizzare i video
+function displayVideos(videos) {
+    const gallery = document.getElementById('videoGallery');
+    gallery.innerHTML = '';  // Pulisce la galleria prima di aggiungere nuovi video
+    
+    videos.forEach(video => {
+        // Crea un nuovo elemento video
+        const videoItem = document.createElement('div');
+        videoItem.classList.add('video-item');
+
+        videoItem.innerHTML = `
+            <video controls class="video">
+                <source src="${video.url}" type="video/mp4">
+                Il tuo browser non supporta il formato video.
+            </video>
+            <h3>${video.title} by ${video.artist}</h3>
+        `;
+
+        gallery.appendChild(videoItem);
+    });
 }
 
 async function LoadAllSongs(userId) {
