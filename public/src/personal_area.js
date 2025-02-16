@@ -2,7 +2,8 @@
 async function checkAuthentication() {
     try {
         // Chiedi le informazioni dell'utente tramite il punto finale .auth/me
-        const authResponse = await fetch('/.auth/me', { credentials: 'include' });        if (response.ok) {
+        const authResponse = await fetch('/.auth/me', { credentials: 'include' });    
+          
         if (authResponse.ok) {  
             const authData = await authResponse.json();
             const userId = authData[0].user_id;
@@ -11,7 +12,7 @@ async function checkAuthentication() {
             const returnUrl = encodeURIComponent(window.location.pathname); // Salva la pagina attuale
             window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
         }
-    }} catch (error) {
+    } catch (error) {
         const returnUrl = encodeURIComponent(window.location.pathname); // Salva la pagina attuale
         window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
 
@@ -60,11 +61,11 @@ async function LoadAllSongs(userId) {
                 document.getElementById("noSongs").style.display = "block"; // Mostra il messaggio "Nessuna canzone"
             }
         } else {
-            console.error('Errore nel caricamento dei video:', response.status);
+            console.error('Errore nel caricamento dei video:', songResponse.status);
             alert('Errore nel caricamento dei video');
         }
     } catch (error) {
-            console.error('Errore nel caricamento dei video:', response.status);
+            console.error('Errore nel caricamento dei video:', songResponse.status);
             alert('Errore nel caricamento dei video');
             }
 
