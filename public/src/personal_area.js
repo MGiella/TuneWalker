@@ -35,7 +35,10 @@ function displayVideos(videos) {
                 <source src="${video.url}" type="video/mp4">
                 Il tuo browser non supporta il formato video.
             </video>
-            <h3>${video.title} by ${video.artist}</h3>
+            <div>
+                <h3>${video.title} by ${video.artist}</h3>
+                <button onclick="deleteItem(${video.id})">Cancella canzone</button>
+            </div>
         `;
 
         gallery.appendChild(videoItem);
@@ -70,5 +73,28 @@ async function LoadAllSongs(userId) {
             }
 
 }
+
+async function deleteItem(songId){
+    const confirmDelete = confirm("Sei sicuro di voler cancellare questa canzone?");
+    if (!confirmDelete) return;
+
+    // Chiamata API per cancellare la canzone dal server
+    const formData = new FormData();
+    formData.append("songId", songId);
+    try{
+        const response = await fetch('https://tunewalkerfunctions.azurewebsites.net/api/DeleteSong', {
+            method: 'POST',
+            body: formData
+        });
+        if (response.ok) {
+            checkAuthentication()
+        } else {
+            alert("Errore nel cancellare la canzone.");
+        }
+    } catch (error) {
+            console.error("Errore durante la cancellazione:", error);
+            alert("Errore durante la cancellazione della canzone.");
+        }
+}   
 
 window.onload = checkAuthentication;
