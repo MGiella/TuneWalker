@@ -36,7 +36,7 @@ function displayVideos(videos) {
                 Il tuo browser non supporta il formato video.
             </video>
             <div>
-                <h3>${video.title} by ${video.artist}</h3>
+                <h3 class="song-title">${video.title} by ${video.artist}</h3>
                 <button onclick="deleteItem('${video.id}')">Cancella canzone</button>
             </div>
         `;

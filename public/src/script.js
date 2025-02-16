@@ -19,7 +19,7 @@ function displayVideos(videos) {
                 <source src="${video.url}" type="video/mp4">
                 Il tuo browser non supporta il formato video.
             </video>
-            <h3>${video.title} by ${video.artist}</h3>
+            <h3 class="song-title">${video.title} by ${video.artist}</h3>
         `;
 
         gallery.appendChild(videoItem);
@@ -100,6 +100,7 @@ async function uploadVideo() {
             const result = await response.json();
             if (response.ok) {
                 const videoUrl = result.url;
+                document.getElementById("anteprima").style.display="block";
                 document.getElementById("videoSource").src = videoUrl;
                 document.getElementById("videoPlayer").load();
                 } else {

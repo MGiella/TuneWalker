@@ -9,44 +9,45 @@
     <script src="src/login.js"></script>
 </head>
 
-<div>
-    <a href="index.html">Home</a>
-    <a class="private-content" href="playlist.html">Area Personale</a>
-    <a class="private-content" href="https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/logout?post_logout_redirect_uri=https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net">Logout</a>
-    <a class="anonymous-content" href="https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net">Login</a>
-</div>
 
-<body>
-    <h1>Benvenuto su TuneWalker!</h1>
-    <p>Crea la tua playlist musicale personale.</p> 
-    <div id="main">
-
-
-        
-        <div id="SongForm" class="private-content">
-                <h1>Aggiungi una Canzone</h1>
-
-                <label for="title">Inserisci il nome della canzone:</label>
-                <input type="text" id="title"><br><br>
-                <label for="artist">Inserisci l'autore:</label>
-                <input type="text" id="artist"><br><br>          
-                <input type="file" id="videoInput" accept="video/mp4">
-                <button onclick="uploadVideo()">Carica</button>
+<body>   
+    <div id="menu-container">
+        <a href="index.html">Home</a>
+        <a class="private-content" href="playlist.html">Area Personale</a>
+        <a class="private-content" id="login-menu" href="https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/logout?post_logout_redirect_uri=https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net">Logout</a>
+        <a class="anonymous-content" id ="logout-menu" href="https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net">Login</a>
+    </div>
+    
+    <div id="container">   
+        <h1>Benvenuto su TuneWalker!</h1>
+        <div class="login-container" >
+            <div class="anonymous-content">
+                <h2>Effettua ora il login per cominciare a caricare le tue canzoni</h2>
+                <button onclick="login()">Login</button>
+            </div>
+            <div class="private-content">
+                <h3>Aggiungi una Canzone</h3>
+                <div id="songForm">
+                    <input type="text" id="title" placeholder="Inserisci il nome della canzone:"><br><br>
+                    <input type="text" id="artist" placeholder="Inserisci l'autore:"><br><br>          
+                    <input type="file" id="videoInput" accept="video/mp4"><br><br>  
+                    <button onclick="uploadVideo()">Carica</button>
+                </div>
+                <div id="anteprima">
+                        <h2>Anteprima Video:</h2>
+                        <video id="videoPlayer" controls width="500">
+                            <source id="videoSource" src="" type="video/mp4">
+                            Il tuo browser non supporta il tag video.
+                        </video>
+                </div>
+            </div>
+        </div>
+        <div id="container-bottom">
+            <h2>Canzoni caricate recentemente</h2>
+            <div id="videoGallery"></div>
+        </div>
+          
             
-                <h2>Anteprima Video:</h2>
-                <video id="videoPlayer" controls width="500">
-                    <source id="videoSource" src="" type="video/mp4">
-                    Il tuo browser non supporta il tag video.
-                </video>
-
-        </div>
-        <div class="anonymous-content">
-            <h2>Effettua ora il login per cominciare a caricare le tue canzoni</h2>
-            <button onclick="login()">Login</button>
-        </div>
-        <h1>Canzoni caricati recentemente</h1>
-        <div id="videoGallery"></div>
-        
     </div>
     
 </body>

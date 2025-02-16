@@ -1,36 +1,245 @@
-#videoGallery{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonne */
-    grid-template-rows: repeat(3, 20%); /* 3 righe */
-    gap: 5%;
-    width: 80%;
-    margin: auto;
-}
-.video-item {
-    background-color: lightblue;
+/* Generale */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1b1b1b;
+    color: #333;
+    margin: 0;
+    padding: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    font-size: 20px;
-      flex-direction: column;
-}
-#main{
-    border: 5px solid black;
-    background-color: beige;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column
+
 }
 
-#videoInput{
-    font-size: large;
-}
-.video{
+/* Menu orizzontale */
+#menu-container {
     width: 100%;
+    background: #1b1b1b;
+    color: white;
+    padding: 2% 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+
+#menu-container a {
+    color: rgb(209, 140, 0);
+    text-decoration: none;
+    font-size: 1em;
+    margin-right: 2em;
+    padding: 10px;
+    transition: background 0.3s;
+    
+}
+
+#menu-container a:hover {
+    text-decoration: underline;
+}
+
+#menu-container #login-menu{
+    border: #1b1b1b;
+    background-color:rgb(209, 140, 0);
+    border-radius: 1.5em;
+    color: #333;
+    text-decoration: none;
+    font-size: 1em;
+    margin-right: 2em;
+    padding: 1em;
+    transition: background 0.3s;
+}
+
+#menu-container #login-menu:hover{
+    text-decoration: underline;
+}
+
+#menu-container #logout-menu:hover{
+    text-decoration: underline;
+
+}
+#menu-container #logout-menu{
+    border: #1b1b1b;
+    background-color:rgb(209, 140, 0);
+    border-radius: 1.5em;
+    color: #333;
+    text-decoration: none;
+    font-size: 1em;
+    margin-right: 2em;
+    padding: 1em;
+    transition: background 0.3s;
+}
+
+/* Contenitore principale */
+#container {
+    width: 90%;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-top: 8em;
+    margin-bottom: 10em;
+    overflow: hidden;
+    background-color: #333;
+    border-radius: 3em;
+    border: #333;
+}
+
+#container_top{
+    text-align: center;
+    padding: 30px 0;
+}
+
+/* Intestazione */
+h1 {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 3em;
+    color:  rgb(209, 140, 0);
+}
+/* Intestazione */
+h2 {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 2em;
+    color:  rgb(209, 140, 0);
+
+}
+h3 {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 1.75em;
+    color:  rgb(209, 140, 0);
+
+}
+
+/* Login */
+.login-container {
+    text-align: center;
+    background-color: rgb(200, 200, 200) ;
+    margin-left: 5em;
+    margin-right: 5em;
+    padding-bottom: 3em;
+    padding-top: 1em;
+    border-radius: 3em;
     height: auto;
 }
+
+.login-container h3{
+    color: #333 ;
+}
+.login-container h2{
+    color: #333 ;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    padding: 1em 2em;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 0.5em;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color:  rgb(209, 140, 0);
+    ;
+}
+
+#songForm{
+    text-align: center;
+    
+}
+
+#songForm input{
+    width: 50%;
+    font-size: medium;
+    color: #333;
+    border: #1b1b1b;
+    border-radius: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin:auto;
+}
+
+#container-bottom{
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-bottom: 5em;
+    border: #1b1b1b ;
+    border-radius: 3em;
+    background-color: #1b1b1b;
+}
+/* Sezione delle canzoni */
+#videoGallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 30px;
+
+}
+
+.video-item {
+    background: rgb(200, 200,200);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 250px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.video {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.video-item:hover {
+    transform: scale(1.05);
+}
+
+
+.video-item audio {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.song-title {
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+/* Link */
+a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .private-content{
     display: none;
+}
+#anteprima{
+    display: none;
+    border: #1b1b1b;
+    width: 50%;
+    height: auto;
+    margin: auto;
+    margin-top: 5em;
+    background: #333;
+    padding: 3em;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.anonymous-content{
+    display: block;
 }
