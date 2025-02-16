@@ -75,9 +75,7 @@ async function LoadAllSongs(userId) {
 }
 
 async function deleteItem(songId){
-    const confirmDelete = confirm("Sei sicuro di voler cancellare questa canzone?");
-    if (!confirmDelete) return;
-
+    
     // Chiamata API per cancellare la canzone dal server
     const formData = new FormData();
     formData.append("songId", songId);
