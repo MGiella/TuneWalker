@@ -37,7 +37,7 @@ function displayVideos(videos) {
             </video>
             <div>
                 <h3>${video.title} by ${video.artist}</h3>
-                <button onclick="deleteItem(${video.id})">Cancella canzone</button>
+                <button onclick="deleteItem("${video.id}")">Cancella canzone</button>
             </div>
         `;
 
