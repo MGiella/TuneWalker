@@ -37,7 +37,7 @@ function displayVideos(videos) {
             </video>
             <div>
                 <h3>${video.title} by ${video.artist}</h3>
-                <button onclick="deleteItem("${video.id}")">Cancella canzone</button>
+                <button onclick="deleteItem('${video.id}')">Cancella canzone</button>
             </div>
         `;
 
@@ -74,25 +74,39 @@ async function LoadAllSongs(userId) {
 
 }
 
-async function deleteItem(songId){
-    
-    // Chiamata API per cancellare la canzone dal server
+async function deleteItem(songId) {
+    let userConfirmed = confirm("Sei sicuro di voler eliminare questa canzone?");
+    if (!userConfirmed) {
+        console.log("Canzone non cancellata");
+        return;
+    }
+
     const formData = new FormData();
     formData.append("songId", songId);
-    try{
+
+    try {
         const response = await fetch('https://tunewalkerfunctions.azurewebsites.net/api/DeleteSong', {
             method: 'POST',
             body: formData
         });
+
         if (response.ok) {
-            checkAuthentication()
+            console.log("Canzone eliminata con successo!");
+            // Aggiorna la lista delle canzoni senza ricaricare la pagina
+            const authResponse = await fetch('/.auth/me', { credentials: 'include' });
+            if (authResponse.ok) {
+                const authData = await authResponse.json();
+                const userId = authData[0].user_id;
+                LoadAllSongs(userId);
+            }
         } else {
+            console.error(`Errore nel cancellare la canzone. Status: ${response.status}`);
             alert("Errore nel cancellare la canzone.");
         }
     } catch (error) {
-            console.error("Errore durante la cancellazione:", error);
-            alert("Errore durante la cancellazione della canzone.");
-        }
-}   
+        console.error("Errore durante la cancellazione:", error);
+        alert("Errore durante la cancellazione della canzone.");
+    }
+}
 
 window.onload = checkAuthentication;
