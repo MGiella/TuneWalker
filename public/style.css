@@ -243,3 +243,89 @@ a:hover {
 .anonymous-content{
     display: block;
 }
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    /* Modifica la larghezza del contenitore principale */
+    #container {
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-top: 4em;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    h3 {
+        font-size: 1.5em;
+    }
+
+    #menu-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 3% 5%;
+    }
+
+    #menu-container a {
+        margin-right: 0;
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    /* Cambia la larghezza dei form input */
+    #songForm input {
+        width: 80%;
+    }
+
+    /* Gallery video items */
+    .video-item {
+        width: 45%;  /* Cambia la larghezza per schermi più piccoli */
+    }
+
+    #container-bottom {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    /* Intestazione */
+    .login-container {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    /* Nascondi anteprima e altre sezioni se necessario */
+    #anteprima {
+        width: 80%;
+        margin-top: 2em;
+        padding: 2em;
+    }
+}
+
+/* Ulteriori miglioramenti per piccoli schermi (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+
+    #menu-container a {
+        font-size: 0.8em;
+        margin-right: 1.5em;
+    }
+
+    .video-item {
+        width: 90%;  /* Usare più spazio per gli schermi più piccoli */
+    }
+}
