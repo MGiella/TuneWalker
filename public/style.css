@@ -244,6 +244,11 @@ a:hover {
     display: block;
 }
 
+#logo{
+    height: auto;
+    width: 6em;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     /* Modifica la larghezza del contenitore principale */
