@@ -49,7 +49,7 @@ function showLoginMenu() {
         window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
         };
     document.getElementById("MicrosoftButton").onclick = function() {
-        window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/aad`;
+        window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/aad?post_login_redirect_uri=${returnUrl}`;
         };
     }
 
