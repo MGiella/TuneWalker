@@ -15,9 +15,29 @@
         <img id="logo" src="earphones.png">
         <a href="index.html">Home</a>
         <a class="private-content" href="playlist.html">Area Personale</a>
-        <a class="private-content" id="login-menu" href="https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/logout?post_logout_redirect_uri=https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net">Logout</a>
-        <a class="anonymous-content" id ="logout-menu" href="https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net">Login</a>
+        <a class="private-content" id="logout-menu" href="https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/logout?post_logout_redirect_uri=https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net">Logout</a>
+        <a class="anonymous-content" onclick=showLoginMenu() id="login-menu">Login</a>
+        <a class="anonymous-content" id ="logout-menu" href="https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=https://TuneWalkerusers.ciamlogin.com/11a32ef9-d633-4447-af78-1fdaa69d0945/v2.0">Login _MC</a>
     </div>
+
+      <div id="overlay">
+        <div id="popup">
+            <h2>Accedi per cominciare a caricare le tue canzoni</h2>
+            <div class = "auth_methods">
+            <div class="auth_method" id="MicrosoftButton">
+                <img id="logo" class="responsive-img" src="Microsoft_logo.png" >
+                <a>Continua con Microsoft</a>
+            </div>
+            <div class="auth_method" id="GoogleButton">
+                <img id="logo" class="responsive-img" src="Google_logo.png" >
+                <a>Continua con Google</a>
+            </div>
+           
+            <button onclick="closePopup()">Chiudi</button>
+            </div>
+        </div>
+    </div>
+
     
     <div id="container">   
         <h1>Benvenuto su TuneWalker!</h1>

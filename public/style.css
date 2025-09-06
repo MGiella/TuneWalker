@@ -9,6 +9,88 @@ body {
 
 }
 
+
+/* Pop Up login */
+#overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    /* Finestra popup */
+    #popup {
+      background-color: #1b1b1b;
+      padding: 20px;
+      border-radius: 12px;
+      width: 20%;
+      height: 50%;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-align: center;
+      display: flex;
+      flex-direction: column; /* elementi uno sotto l'altro */
+      gap: 5%;      
+      align-items: center;    /* centra orizzontalmente i figli */
+      justify-content: center;/* centra verticalmente (se ha altezza) */
+    }
+   
+    #popup button {
+      margin-top: 15px;
+      padding: 8px 16px;
+      border: none;
+      background: #007BFF;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #popup button:hover {
+      background: #0056b3;
+    }
+
+    .responsive-img {
+        max-height: 100%;    /* mantiene le proporzioni */
+        width: auto;
+        height: auto;
+        display: block;  /* elimina spazi indesiderati sotto l'immagine */
+        object-fit: contain;
+    } 
+    .auth_methods{
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column; /* elementi uno sotto l'altro */
+      gap: 5%;      
+      align-items: center;    /* centra orizzontalmente i figli */
+      justify-content: center;/* centra verticalmente (se ha altezza) */
+    }
+    .auth_method {
+        width: 80%;
+        height: 10%;
+        display: flex;
+        flex-direction: row; /* elementi affiancati */
+        gap: 5%;
+        border: 2px ;
+        padding: 10px;
+        color: #fff;
+        background-color: rgb(200, 200, 200) ;
+        text-align: center;
+        align-items: center;     /* centra orizzontalmente */
+        border-radius: 1.5em;
+
+    }
+    .auth_method:hover {
+      background: rgb(209, 140, 0);
+    }
+    .auth_method a:hover {
+        text-decoration: none;
+
+    }
+    
 /* Menu orizzontale */
 #menu-container {
     width: 100%;

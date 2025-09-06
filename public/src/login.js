@@ -1,4 +1,4 @@
-// Funzione per verificare se l'utente è autenticato
+// Funzione per verificare se l'utente è autenticato in modo da visualizzare o meno contenuto personale
 async function checkAuthentication() {
     try {
         // Chiedi le informazioni dell'utente tramite il punto finale .auth/me
@@ -41,3 +41,18 @@ async function login() {
 }
 // Chiamare la funzione per verificare l'autenticazione quando la pagina si carica
 window.onload = checkAuthentication;
+
+function showLoginMenu() {
+    const returnUrl = encodeURIComponent(window.location.pathname); // Salva la pagina attuale
+    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("GoogleButton").onclick = function() {
+        window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
+        };
+    document.getElementById("MicrosoftButton").onclick = function() {
+        window.location.href = `https://TuneWalkerusers.ciamlogin.com/11a32ef9-d633-4447-af78-1fdaa69d0945/v2.0?post_login_redirect_uri=${returnUrl}`;
+        };
+    }
+
+    function closePopup() {
+      document.getElementById("overlay").style.display = "none";
+    }
