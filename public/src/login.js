@@ -49,7 +49,7 @@ function showLoginMenu() {
         window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
         };
     document.getElementById("MicrosoftButton").onclick = function() {
-        window.location.href = `https://TuneWalkerusers.ciamlogin.com/11a32ef9-d633-4447-af78-1fdaa69d0945/v2.0?post_login_redirect_uri=${returnUrl}`;
+        window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/aad`;
         };
     }
 
