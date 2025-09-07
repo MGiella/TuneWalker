@@ -4,29 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TuneWalker</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="personal.css">
     <script src="src/login.js"></script>
+    <script src="src/script.js"></script>
+
 </head>
 
-<div>
-    <img id="logo" src="earphones.png">
-    <a href="index.html">Home</a>
-    <a href="profile.html">Profilo</a>
-    <a href="playlist.html">Playlist</a> 
-</div>
-
-<div class="Public_area">
-    Effettua il login 
-    <button>Login</button>
-</div>
-
-<div class="Personal_area">
-    <div>
-        Aggiungi una canzone:
-        <button>Aggiungi</button>
+  <div id="menu-container">
+        <img id="logo" src="earphones.png">
+        <a href="index.html">Home</a>
+        <a class="private-content" href="profile.html">Libreria</a>
+        <a class="private-content" href="playlist.html">Playlist</a>
+        <a class="private-content" id="logout-menu" href="https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/logout?post_logout_redirect_uri=https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net">Logout</a>
+        <a class="anonymous-content" onclick=showLoginMenu() id="login-menu">Login</a>
     </div>
-    Questo è il tuo profilo, queste sono le tue canzoni
-    <li>
-        <u>Item</u>
-    </li>
+
+<div id="container">
+    <div id="form_and_library">
+        <div id="form">
+                <h1>Aggiungi una Canzone</h1>
+                <div id="songForm">
+                    <input type="text" id="title" placeholder="Inserisci il nome della canzone:"><br><br>
+                    <input type="text" id="artist" placeholder="Inserisci l'autore:"><br><br>          
+                    <input type="file" id="videoInput" accept="video/mp4"><br><br>  
+                    <button id="uploadButton" onclick="uploadVideo()">Carica</button>
+                </div>
+                
+        </div>
+        <div id="library">
+            <div id="videoGallery"></div>
+            <h1>Cazoni Caricate</h1>
+        </div>
+    </div>>
 </div>
+
+<div id="container-bottom">
+    <div id="anteprima">
+        <h2>Anteprima Video:</h2>
+            <video id="videoPlayer" controls width="500">
+            <source id="videoSource" src="" type="video/mp4">
+                    Il tuo browser non supporta il tag video.
+            </video>
+    </div>
+</div>
+

@@ -1,0 +1,110 @@
+#container {
+    width: 80%;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-top: 10%;
+    margin-bottom: 10em;
+    overflow: hidden;
+    background-color: #333;
+    border-radius: 3em;
+    border: #333;
+}
+
+
+#form_and_library {
+    width: 100%;
+
+    overflow: hidden;
+    border-radius: 3em;
+    border: #333;
+    display: flex;
+    
+}
+
+#form {
+    background-color:  #1b1b1b;
+    width: 30%;
+    height: 100%;
+    margin: 5%;
+    overflow: visible;
+    border-radius: 3em;
+    border: #333;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    box-sizing: border-box;
+}
+
+#songForm {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 100%;
+    height: 90%;
+    margin-bottom: 10em;
+    box-sizing: border-box;
+}
+#uploadButton{
+    width: 40%;
+    height: 25%;
+    font-size: 150%;
+    border-radius: 2em;
+    padding: 1em;
+}
+
+#songForm input{
+    font-size: large;
+    height: 20%;
+    width: 80%;
+}
+
+#songForm  input[type="text"] {
+  font-size: large;
+}
+
+#songForm  input[type="file"] {
+  font-size: large;
+  color: rgb(209, 140, 0);
+}
+
+#songForm input[type="file"]::file-selector-button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 1em;
+  border-radius: 1.5em;
+  cursor: pointer;
+  transition: background 0.3s;
+    font-size: large;
+  margin-right: 3%;
+
+}
+
+#songForm  input[type="file"]::file-selector-button:hover {
+  background:  rgb(209, 140, 0);
+}
+
+#library {
+    background-color:  #1b1b1b;
+    width: 60%;
+    height: 95%;
+    margin: 5%;
+    overflow: hidden;
+    border-radius: 3em;
+    border: #333;
+    display: flex;
+    padding: 2em;
+
+}
+
+
+.video-item {
+    margin-top: 5%;
+    background: #c8c8c8;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width:  60%;
+    height: 40%;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 1em;
+    padding: 1em;
+}

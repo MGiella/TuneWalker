@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-
+    justify-content: center;
 }
 
 
@@ -15,7 +15,7 @@ body {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.4);
       display: none;
       justify-content: center;
       align-items: center;
@@ -33,24 +33,20 @@ body {
       text-align: center;
       display: flex;
       flex-direction: column; /* elementi uno sotto l'altro */
-      gap: 5%;      
+      gap: 2%;      
       align-items: center;    /* centra orizzontalmente i figli */
       justify-content: center;/* centra verticalmente (se ha altezza) */
     }
    
     #popup button {
-      margin-top: 15px;
-      padding: 8px 16px;
-      border: none;
-      background: #007BFF;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
+        width: 40%;
+        height: 20%;
+        font-size: 150%;
+        border-radius: 1.5em;
+        padding: 1em;
+        margin-top: 10%;
     }
 
-    #popup button:hover {
-      background: #0056b3;
-    }
 
     .responsive-img {
         max-height: 100%;    /* mantiene le proporzioni */
@@ -94,28 +90,33 @@ body {
 /* Menu orizzontale */
 #menu-container {
     width: 100%;
-    background: #1b1b1b;
+    height: 5%;
+    background: black;
     color: white;
-    padding: 2% 5%;
+    padding: 3% 5% 3% 1%;
     position: fixed;
     top: 0;
     left: 0;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
+    font-size: large;
+
+
 }
 
 #menu-container a {
     color: rgb(209, 140, 0);
     text-decoration: none;
     font-size: 1em;
-    margin-right: 2em;
-    padding: 10px;
+    margin-left: 1%;
     transition: background 0.3s;
     
 }
 
 #menu-container a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: rgb(252, 186, 52);
 }
 
 #menu-container #login-menu{
@@ -125,17 +126,20 @@ body {
     color: #333;
     text-decoration: none;
     font-size: 1em;
-    margin-right: 2em;
+    margin-left: 1%;
     padding: 1em;
     transition: background 0.3s;
 }
 
 #menu-container #login-menu:hover{
-    text-decoration: underline;
+    text-decoration: none;
+    background-color: #333;
+    color: rgb(209, 140, 0);
+    cursor: pointer;
 }
 
 #menu-container #logout-menu:hover{
-    text-decoration: underline;
+    text-decoration: none;
 
 }
 #menu-container #logout-menu{
@@ -152,10 +156,10 @@ body {
 
 /* Contenitore principale */
 #container {
-    width: 90%;
+    width: 60%;
     margin-left: 5em;
     margin-right: 5em;
-    margin-top: 8em;
+    margin-top: 10%;
     margin-bottom: 10em;
     overflow: hidden;
     background-color: #333;
@@ -167,6 +171,7 @@ body {
     text-align: center;
     padding: 30px 0;
 }
+
 
 /* Intestazione */
 h1 {
@@ -210,20 +215,31 @@ h3 {
     color: #333 ;
 }
 
+.anonymous-content button{
+    width: 20%;
+    height: 30%;
+    font-size: 150%;
+    border-radius: 1.5em;
+    padding: 1em;
+}
 button {
     background-color: #333;
     color: white;
     padding: 1em 2em;
     border: none;
     cursor: pointer;
-    font-size: 1em;
-    border-radius: 0.5em;
+    font-size: large;
+    border-radius: 1.5em;
     transition: background 0.3s ease-in-out;
+    width: 20%;
+    height: 30%;
+
+    
 }
 
 button:hover {
     background-color:  rgb(209, 140, 0);
-    ;
+    color: #333;
 }
 
 #songForm{
@@ -231,17 +247,51 @@ button:hover {
     
 }
 
+#songForm button{
+    font-size: 150%;
+    
+}
+
+
 #songForm input{
     width: 50%;
-    font-size: medium;
+    font-size: large;
     color: #333;
     border: #1b1b1b;
     border-radius: 1em;
     padding-left: 1em;
     padding-right: 1em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-top: 1em;
+    padding-bottom: 1em;
     margin:auto;
+}
+
+
+
+#songForm  input[type="text"] {
+  font-size: large;
+}
+
+#songForm  input[type="file"] {
+  font-size: large;
+  color: #333;
+}
+
+#songForm input[type="file"]::file-selector-button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 1em;
+  border-radius: 1.5em;
+  cursor: pointer;
+  transition: background 0.3s;
+    font-size: large;
+  margin-right: 3%;
+
+}
+
+#songForm  input[type="file"]::file-selector-button:hover {
+  background:  rgb(209, 140, 0);
 }
 
 #container-bottom{
@@ -263,13 +313,14 @@ button:hover {
 }
 
 .video-item {
-    background: rgb(200, 200,200);
-    padding: 20px;
-    border-radius: 12px;
+    background: #c8c8c8;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     text-align: center;
-    width: 250px;
+    width: 20%;
+    height: 20%;
     transition: transform 0.3s ease-in-out;
+    border-radius: 1em;
+    padding: 1em;
 }
 
 .video {
