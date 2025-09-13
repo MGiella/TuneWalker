@@ -16,11 +16,12 @@ TuneWalker è una web application che permette agli utenti di caricare e ascolta
 - **Backend**: Azure Functions per gestire il caricamento e il recupero dei video.
 - **Database**: Azure Cosmos DB per salvare i metadati dei file video e le informazioni sugli utenti.
 - **Storage**: Azure Blob Storage per conservare i file MP4.
-- **Autenticazione**: Gli utenti possono autenticarsi tramite il sistema di autenticazione di Google. 
+- **Autenticazione**: Gli utenti possono autenticarsi tramite il sistema di autenticazione di Google o di Microsoft
 
 ## URL del Progetto
 
 - **Web App**: [https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/]
+
 
 
 
