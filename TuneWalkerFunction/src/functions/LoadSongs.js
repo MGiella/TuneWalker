@@ -37,7 +37,7 @@ app.http('LoadSongs', {
             }
 
             // Esegui la query per ottenere i brani
-            const { resources: songs } = await container.items.query(querySpec).fetchAll();
+            let { resources: songs } = await container.items.query(querySpec).fetchAll();
             
 
             //taglia le canzoni con stesso artista + titolo 
