@@ -21,14 +21,8 @@ app.http('LoadSongs', {
             // Se l'ID utente non è fornito, prendi le canzoni generali
             if (!userId) {
                 querySpec = {
-        query: `
-            SELECT TOP 12 VALUE c
-            FROM c
-            WHERE c.title IS NOT NULL AND c.artist IS NOT NULL
-            GROUP BY c.title, c.artist, c.url, c.lastModified
-            ORDER BY c.lastModified DESC
-        `
-    };
+                    query: "SELECT TOP 100 * FROM c ORDER BY c.lastModified DESC"
+                };
             } else {
                 // Altrimenti, filtra per userId
                 querySpec = {
@@ -44,6 +38,22 @@ app.http('LoadSongs', {
 
             // Esegui la query per ottenere i brani
             const { resources: songs } = await container.items.query(querySpec).fetchAll();
+            
+
+            //taglia le canzoni con stesso artista + titolo 
+             if (!userId) {
+                const uniqueSongs = [];
+                const seen = new Set();
+                for (const song of songs) {
+                    const key = song.title + "|" + song.artist;
+                    if (!seen.has(key)) {
+                        uniqueSongs.push(song);
+                        seen.add(key);
+                    }
+                    if (uniqueSongs.length >= 12) break; // prendi solo le prime 12
+                }
+            }
+
 
             console.log("Can songs retrieved:", songs);
 

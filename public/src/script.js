@@ -16,6 +16,7 @@ function displayVideos(videos) {
 
         videoItem.innerHTML = `
             <div class="player">
+             <button class="delete_button" onclick="deleteItem('${video.id}')"></button>
                 <video controls class="video">
                     <source src="${video.url}" type="video/mp4">
                     Il tuo browser non supporta il formato video.
