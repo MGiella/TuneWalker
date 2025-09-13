@@ -39,10 +39,10 @@ app.http('LoadSongs', {
             // Esegui la query per ottenere i brani
             const { resources: songs } = await container.items.query(querySpec).fetchAll();
             
-
+            let uniqueSongs = songs;
             //taglia le canzoni con stesso artista + titolo 
-             if (!userId) {
-                const uniqueSongs = [];
+            if (!userId) {
+                uniqueSongs = [];
                 const seen = new Set();
                 for (const song of songs) {
                     const key = song.title + "|" + song.artist;
@@ -55,13 +55,13 @@ app.http('LoadSongs', {
             }
 
 
-            console.log("Can songs retrieved:", songs);
+            console.log("Can songs retrieved:", uniqueSongs);
 
             // Restituisce la lista delle canzoni in formato JSON
             return {
                 status: 200,
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ songs })
+                body: JSON.stringify({ uniqueSongs })
             };
 
         } catch (error) {

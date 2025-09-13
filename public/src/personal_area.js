@@ -108,5 +108,52 @@ async function deleteItem(songId) {
         alert("Errore durante la cancellazione della canzone.");
     }
 }
+async function uploadVideo() {
+    const title = document.getElementById("title").value
+    const artist = document.getElementById("artist").value
+    const fileInput = document.getElementById("videoInput");
+    const file = fileInput.files[0];
+
+    if (!file || !title || !artist) {
+        alert('Compila tutti i campi!');
+        return;
+      }
+
+    const authResponse = await fetch('/.auth/me', { credentials: 'include' });
+    const authData = await authResponse.json();
+    const userId = authData[0].user_id;
+
+
+    const formData = new FormData();
+        formData.append("song", file);
+        formData.append("title", title);
+        formData.append("artist", artist);
+        formData.append("userId", userId);
+
+        
+        try {
+            const response = await fetch("https://tunewalkerfunctions.azurewebsites.net/api/addSong", {
+            method: "POST",
+                body: formData
+            });
+        
+            const result = await response.json();
+            if (response.ok) {
+                const videoUrl = result.url;
+                document.getElementById("anteprima").style.display="block";
+                document.getElementById("videoSource").src = videoUrl;
+                document.getElementById("videoPlayer").load();
+                } else {
+                    alert("Errore durante l'upload: " + result.error);
+                }
+            } catch (error) {
+                console.error("Errore:", error);
+                    alert("Errore durante la richiesta.");
+                }
+                    LoadSongs()
+
+            }
+    
+
 
 document.addEventListener('DOMContentLoaded', checkAuthentication());
