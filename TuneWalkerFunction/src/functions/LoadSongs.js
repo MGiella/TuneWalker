@@ -21,8 +21,14 @@ app.http('LoadSongs', {
             // Se l'ID utente non è fornito, prendi le canzoni generali
             if (!userId) {
                 querySpec = {
-                    query: "SELECT TOP 12 * FROM c ORDER BY c.lastModified DESC"
-                };
+        query: `
+            SELECT TOP 12 VALUE c
+            FROM c
+            WHERE c.title IS NOT NULL AND c.artist IS NOT NULL
+            GROUP BY c.title, c.artist, c.url, c.lastModified
+            ORDER BY c.lastModified DESC
+        `
+    };
             } else {
                 // Altrimenti, filtra per userId
                 querySpec = {
