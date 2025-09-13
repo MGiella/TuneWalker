@@ -13,7 +13,6 @@
 
 #form_and_library {
     width: 100%;
-
     overflow: hidden;
     border-radius: 3em;
     border: #333;
@@ -25,7 +24,7 @@
     background-color:  #1b1b1b;
     width: 30%;
     height: 100%;
-    margin: 5%;
+    margin: 5% 2%;
     overflow: visible;
     border-radius: 3em;
     border: #333;
@@ -87,24 +86,14 @@
     background-color:  #1b1b1b;
     width: 60%;
     height: 95%;
-    margin: 5%;
+    margin: 5% 2%;
     overflow: hidden;
     border-radius: 3em;
     border: #333;
     display: flex;
-    padding: 2em;
+    padding: 0.5em;
+    flex-direction: column;
 
 }
 
 
-.video-item {
-    margin-top: 5%;
-    background: #c8c8c8;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    width:  60%;
-    height: 40%;
-    transition: transform 0.3s ease-in-out;
-    border-radius: 1em;
-    padding: 1em;
-}

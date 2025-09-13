@@ -25,22 +25,21 @@ function displayVideos(videos) {
     const gallery = document.getElementById('videoGallery');
     gallery.innerHTML = '';  // Pulisce la galleria prima di aggiungere nuovi video
     
-    videos.forEach(video => {
+  videos.forEach(video => {
         // Crea un nuovo elemento video
         const videoItem = document.createElement('div');
         videoItem.classList.add('video-item');
 
         videoItem.innerHTML = `
-            <video controls class="video">
-                <source src="${video.url}" type="video/mp4">
-                Il tuo browser non supporta il formato video.
-            </video>
-            <div>
-                <h3 class="song-title">${video.title} by ${video.artist}</h3>
-                <button onclick="deleteItem('${video.id}')">Cancella canzone</button>
+            <div class="player">
+                <button class="delete_button" onclick="deleteItem('${video.id}')"></button>
+                <video controls class="video">
+                    <source src="${video.url}" type="video/mp4">
+                    Il tuo browser non supporta il formato video.
+                </video>
             </div>
+            <h3 class="song-title">${video.title} by ${video.artist}</h3>
         `;
-
         gallery.appendChild(videoItem);
     });
 }
@@ -67,6 +66,7 @@ async function LoadAllSongs(userId) {
             console.error('Errore nel caricamento dei video:', songResponse.status);
             alert('Errore nel caricamento dei video');
         }
+
     } catch (error) {
             console.error('Errore nel caricamento dei video:', songResponse.status);
             alert('Errore nel caricamento dei video');
@@ -109,4 +109,4 @@ async function deleteItem(songId) {
     }
 }
 
-window.onload = checkAuthentication;
+document.addEventListener('DOMContentLoaded', checkAuthentication());

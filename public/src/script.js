@@ -15,14 +15,17 @@ function displayVideos(videos) {
         videoItem.classList.add('video-item');
 
         videoItem.innerHTML = `
-            <video controls class="video">
-                <source src="${video.url}" type="video/mp4">
-                Il tuo browser non supporta il formato video.
-            </video>
+            <div class="player">
+                <video controls class="video">
+                    <source src="${video.url}" type="video/mp4">
+                    Il tuo browser non supporta il formato video.
+                </video>
+            </div>
             <h3 class="song-title">${video.title} by ${video.artist}</h3>
         `;
 
         gallery.appendChild(videoItem);
+    
     });
 }
 
@@ -48,6 +51,8 @@ async function LoadSongs() {
             console.error('Errore nel caricamento dei video:', response.status);
             alert('Errore nel caricamento dei video');
         }
+
+      
     } catch (error) {
         try{
             const formData = new FormData();
