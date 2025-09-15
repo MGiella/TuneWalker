@@ -45,7 +45,7 @@ app.http('LoadSongs', {
                 const uniqueSongs = [];
                 const seen = new Set();
                 for (const song of songs) {
-                    const key = song.title + "|" + song.artist;
+                    const key = (song.title.trim().toLowerCase() + "|" + song.artist.trim().toLowerCase());
                     if (!seen.has(key)) {
                         uniqueSongs.push(song);
                         seen.add(key);

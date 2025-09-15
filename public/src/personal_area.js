@@ -101,11 +101,9 @@ async function deleteItem(songId) {
             }
         } else {
             console.error(`Errore nel cancellare la canzone. Status: ${response.status}`);
-            alert("Errore nel cancellare la canzone.");
-        }
+            }
     } catch (error) {
         console.error("Errore durante la cancellazione:", error);
-        alert("Errore durante la cancellazione della canzone.");
     }
 }
 async function uploadVideo() {
