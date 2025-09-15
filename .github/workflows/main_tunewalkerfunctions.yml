@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: './TuneWalkerFunction' # set this to the path to your web app project, defaults to the repository root
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'TuneWalkerFunction' # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '20.x' # set this to the node version to use (supports 8.x, 10.x, 12.x)
 
 jobs:
@@ -40,4 +40,7 @@ jobs:
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_720233117B9C4B3A9BBF1387D87E3F30 }}
+          scm-do-build-during-deployment: true
+          enable-oryx-build: true
+
 
