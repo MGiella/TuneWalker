@@ -71,7 +71,7 @@ async function LoadAllSongs(userId) {
             console.error('Errore nel caricamento dei video:', songResponse.status);
         }
     } catch (error) {
-            console.error('Errore nel caricamento dei video:', songResponse.status);
+            console.error('Errore nel caricamento dei video:', error);
             }
 
 }
@@ -143,11 +143,11 @@ async function uploadVideo() {
                 document.getElementById("videoSource").src = videoUrl;
                 document.getElementById("videoPlayer").load();
                 } else {
-                    alert("Errore durante l'upload: " + result.error);
+                    console.log("Errore durante l'upload: " + result.error);
                 }
             } catch (error) {
-                console.error("Errore:", error);
-                    alert("Errore durante la richiesta.");
+                    console.error("Errore:", error);
+                    console.log("Errore durante la richiesta.");
                 }
                     LoadSongs()
 
@@ -155,4 +155,4 @@ async function uploadVideo() {
     
 
 
-document.addEventListener('DOMContentLoaded', checkAuthentication());
+document.addEventListener('DOMContentLoaded', checkAuthentication);

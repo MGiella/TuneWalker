@@ -16,7 +16,7 @@ async function checkAuthentication() {
             });
         } else {
             // Se la risposta ha uno stato diverso da 200 (ad esempio 401 o 403)
-            console.error('Errore di autenticazione, status:', response.status);
+            console.log('Errore di autenticazione, status:', response.status);
             if (response.status === 401) {
                 // L'utente non è autenticato, reindirizza alla pagina di login
                 

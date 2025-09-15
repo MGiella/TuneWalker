@@ -57,11 +57,9 @@ async function LoadSongs() {
             displayVideos(data.songs);
         } else {
             console.error('Errore nel caricamento dei video:', songResponse.status);
-            alert('Errore nel caricamento dei video');
         }
     } catch (error) {
         console.error("Errore durante la fetch:", error);
-        alert('Errore nel caricamento dei video');
     }
 }
 
