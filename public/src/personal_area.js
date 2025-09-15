@@ -24,9 +24,9 @@ async function checkAuthentication() {
 function displayVideos(videos) {
     const gallery = document.getElementById('videoGallery');
     gallery.innerHTML = '';  // Pulisce la galleria prima di aggiungere nuovi video
-    
-  videos.forEach(video => {
-        // Crea un nuovo elemento video
+    videos
+    .filter(v => v && v.url && v.title && v.artist) // tieni solo quelli validi
+    .forEach(video => {
         const videoItem = document.createElement('div');
         videoItem.classList.add('video-item');
 
@@ -52,6 +52,7 @@ async function LoadAllSongs(userId) {
             method: "POST",
             body: formData
         });
+        console.log(songResponse)
         // Verifica se la risposta è ok
         if (songResponse.ok) {
             const data = await songResponse.json();
@@ -64,12 +65,9 @@ async function LoadAllSongs(userId) {
             }
         } else {
             console.error('Errore nel caricamento dei video:', songResponse.status);
-            alert('Errore nel caricamento dei video');
         }
-
     } catch (error) {
             console.error('Errore nel caricamento dei video:', songResponse.status);
-            alert('Errore nel caricamento dei video');
             }
 
 }
@@ -89,7 +87,7 @@ async function deleteItem(songId) {
             method: 'POST',
             body: formData
         });
-
+        console.log(songResponse);
         if (response.ok) {
             console.log("Canzone eliminata con successo!");
             // Aggiorna la lista delle canzoni senza ricaricare la pagina
@@ -138,7 +136,6 @@ async function uploadVideo() {
             const result = await response.json();
             if (response.ok) {
                 const videoUrl = result.url;
-                document.getElementById("anteprima").style.display="block";
                 document.getElementById("videoSource").src = videoUrl;
                 document.getElementById("videoPlayer").load();
                 } else {

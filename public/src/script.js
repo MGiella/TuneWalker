@@ -8,12 +8,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 function displayVideos(videos) {
     const gallery = document.getElementById('videoGallery');
     gallery.innerHTML = '';  // Pulisce la galleria prima di aggiungere nuovi video
-    
-    videos.forEach(video => {
-        // Crea un nuovo elemento video
+    videos
+    .filter(v => v && v.url && v.title && v.artist) // tieni solo quelli validi
+    .forEach(video => {
         const videoItem = document.createElement('div');
         videoItem.classList.add('video-item');
-        
         videoItem.innerHTML = `
             <div class="player">
                 <video controls class="video">
@@ -23,9 +22,7 @@ function displayVideos(videos) {
             </div>
             <h3 class="song-title">${video.title} by ${video.artist}</h3>
         `;
-
         gallery.appendChild(videoItem);
-    
     });
 }
 
@@ -105,11 +102,11 @@ async function uploadVideo() {
                 document.getElementById("videoSource").src = videoUrl;
                 document.getElementById("videoPlayer").load();
                 } else {
-                    alert("Errore durante l'upload: " + result.error);
+                   console.error("Errore durante l'upload: " + result.error);
                 }
             } catch (error) {
                 console.error("Errore:", error);
-                    alert("Errore durante la richiesta.");
+                    
                 }
                     LoadSongs()
 
