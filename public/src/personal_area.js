@@ -61,11 +61,9 @@ async function LoadAllSongs(userId) {
         if (songResponse.ok) {
             const data = await songResponse.json();
             if (data.songs && data.songs.length > 0) {
-                document.getElementById("noSongs").style.display = "none"; 
                 displayVideos(data.songs);  // Chiamata alla funzione che visualizzerà
             } else {
                 console.log("Nessuna canzone disponibile.");
-                document.getElementById("noSongs").style.display = "block"; // Mostra il messaggio "Nessuna canzone"
             }
         } else {
             console.error('Errore nel caricamento dei video:', songResponse.status);
@@ -139,17 +137,14 @@ async function uploadVideo() {
         
             const result = await response.json();
             if (response.ok) {
-                const videoUrl = result.url;
-                document.getElementById("videoSource").src = videoUrl;
-                document.getElementById("videoPlayer").load();
-                } else {
+                LoadAllSongs(userId);
+            } else {
                     console.log("Errore durante l'upload: " + result.error);
                 }
             } catch (error) {
                     console.error("Errore:", error);
                     console.log("Errore durante la richiesta.");
                 }
-                    LoadSongs()
 
             }
     
