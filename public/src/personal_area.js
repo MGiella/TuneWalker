@@ -22,26 +22,30 @@ async function checkAuthentication() {
 
 // Funzione per visualizzare i video
 function displayVideos(videos) {
-    const gallery = document.getElementById('videoGallery');
-    gallery.innerHTML = '';  // Pulisce la galleria prima di aggiungere nuovi video
-    videos
-    .filter(v => v && v.url && v.title && v.artist) // tieni solo quelli validi
-    .forEach(video => {
-        const videoItem = document.createElement('div');
-        videoItem.classList.add('video-item');
+    try{
+        const gallery = document.getElementById('videoGallery');
+        gallery.innerHTML = '';  // Pulisce la galleria prima di aggiungere nuovi video
+        console.log(videos)
+        videos
+        .forEach(video => {
+            const videoItem = document.createElement('div');
+            videoItem.classList.add('video-item');
 
-        videoItem.innerHTML = `
-            <div class="player">
-                <button class="delete_button" onclick="deleteItem('${video.id}')"></button>
-                <video controls class="video">
-                    <source src="${video.url}" type="video/mp4">
-                    Il tuo browser non supporta il formato video.
-                </video>
-            </div>
-            <h3 class="song-title">${video.title} by ${video.artist}</h3>
-        `;
-        gallery.appendChild(videoItem);
-    });
+            videoItem.innerHTML = `
+                <div class="player">
+                    <button class="delete_button" onclick="deleteItem('${video.id}')"></button>
+                    <video controls class="video">
+                        <source src="${video.url}" type="video/mp4">
+                        Il tuo browser non supporta il formato video.
+                    </video>
+                </div>
+                <h3 class="song-title">${video.title} by ${video.artist}</h3>
+            `;
+            gallery.appendChild(videoItem);
+        });}
+        catch(error){
+            console.log(error)
+        }
 }
 
 async function LoadAllSongs(userId) {
