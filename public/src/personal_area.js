@@ -9,12 +9,10 @@ async function checkAuthentication() {
             const userId = authData[0].user_id;
             LoadAllSongs(userId)
         } else {
-            const returnUrl = encodeURIComponent(window.location.pathname); // Salva la pagina attuale
-            window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
+            window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net`;
         }
     } catch (error) {
-        const returnUrl = encodeURIComponent(window.location.pathname); // Salva la pagina attuale
-        window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net/.auth/login/google?post_login_redirect_uri=${returnUrl}`;
+        window.location.href = `https://tunewalker-bub3fterazgbcyht.westeurope-01.azurewebsites.net`;
 
     }
 }

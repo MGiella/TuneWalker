@@ -39,7 +39,7 @@ app.http('DeleteSong', {
              console.log("Documento eliminato da Cosmos DB");
 
             // Restituisce l'URL pubblico del file
-            const videoUrl = blockBlobClient.url;
+            //const videoUrl = blockBlobClient.url;
            return {
                 status: 200,
                 body: JSON.stringify({ message: "Canzone eliminata correttamente!" })

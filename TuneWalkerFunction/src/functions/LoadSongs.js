@@ -15,7 +15,7 @@ app.http('LoadSongs', {
             console.log("Connesso a Cosmos DB");
 
             const formData = await request.formData();
-            const userId = formData.get("userId"); // Prendi il file dal form
+            const userId = formData.get("userId"); 
             let querySpec;
 
             // Se l'ID utente non è fornito, prendi le canzoni generali
